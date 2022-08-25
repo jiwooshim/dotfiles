@@ -1,6 +1,12 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
+let need_to_install_plugins=0
+if empty(system("grep lazy_load ~/.vim/bundle/vundle/autoload/vundle.vim"))
+    echo "Installing Vundle..."
+    echo ""
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let need_to_install_plugins=1
+endif
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -16,7 +22,7 @@ Plugin 'sagi-z/vimspectorpy'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
-Plugin 'python-mode/python-mode'
+"Plugin 'python-mode/python-mode'
 Plugin 'ap/vim-buftabline'
 "Plugin 'lambdalisue/vim-pyenv'
 Plugin 'davidhalter/jedi-vim'
@@ -24,7 +30,14 @@ Plugin 'davidhalter/jedi-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+syntax on
 
+if need_to_install_plugins==1
+    echo "Installing plugins..."
+    silent! PluginInstall
+    echo "Done!"
+    q
+endif
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -113,3 +126,7 @@ let g:python3_host_prog=$HOME.'/.venv/bin/python3'
 
 " convert all typed tabs to spaces
 set expandtab
+
+
+
+
