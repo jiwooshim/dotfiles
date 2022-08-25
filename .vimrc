@@ -4,7 +4,7 @@ let need_to_install_plugins=0
 if empty(system("grep lazy_load ~/.vim/bundle/vundle/autoload/vundle.vim"))
     echo "Installing Vundle..."
     echo ""
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     let need_to_install_plugins=1
 endif
 " set the runtime path to include Vundle and initialize
@@ -31,6 +31,7 @@ Plugin 'davidhalter/jedi-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 syntax on
+set path+=**
 
 if need_to_install_plugins==1
     echo "Installing plugins..."
